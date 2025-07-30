@@ -66,13 +66,3 @@ def recommend_recipes(user_ingredients):
 
     return sorted(results, key=lambda x: x['매칭률'], reverse=True)[:5]
 
-# 테스트 실행
-if __name__ == "__main__":
-    result = recommend_recipes(["김치", "돼지고기"])
-    for r in result:
-        print(f"\n▶ 메뉴: {r['메뉴']} ({int(r['매칭률']*100)}%)")
-        print("레시피:", r['레시피'])
-        print("부족한 재료:", r['부족재료'])
-        print("추천 상품:")
-        for item in r['추천상품']:
-            print(f" - {item['이름']} ({item['가격']}원 / {item['단위']})")
