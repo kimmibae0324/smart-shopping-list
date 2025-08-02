@@ -1,14 +1,14 @@
-# app/main.py
+import os
 from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import List
-from .recommender import recommend_recipes
+import uvicorn
 
 app = FastAPI()
 
-class IngredientsRequest(BaseModel):
-    ingredients: List[str]
+@app.get("/")
+async def root():
+    return {"message": "Hello from Railway!"}
 
-@app.post("/recommend")
-def get_recommendations(request: IngredientsRequest):
-    return {"recommendations": recommend_recipes(request.ingredients)}
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Railway가 할당해주는 포트 받기
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
+
